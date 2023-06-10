@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DraggableOpenXR : MonoBehaviour {
 
-	public OpenXR_NewController steamCtl;
+	public OpenXR_NewController ctl;
 	public Transform minBound;
 	public bool fixX = false;
 	public bool fixY = false;
@@ -15,10 +15,10 @@ public class DraggableOpenXR : MonoBehaviour {
 	bool dragging;
 
 	void FixedUpdate() {
-		Vector3 rayPos = steamCtl.transform.position;
-		Vector3 rayDir = steamCtl.transform.forward;
+		Vector3 rayPos = ctl.transform.position;
+		Vector3 rayDir = ctl.transform.forward;
 
-		if (steamCtl.menuPressed) {
+		if (ctl.menuPressed) {
 			dragging = false;
 			Ray ray = new Ray(rayPos, rayDir);
 			RaycastHit hit;
@@ -27,9 +27,9 @@ public class DraggableOpenXR : MonoBehaviour {
 			}
 		}
 
-		if (steamCtl.menuUp) dragging = false;
+		if (ctl.menuUp) dragging = false;
 
-		if (dragging && steamCtl.menuPressed) {
+		if (dragging && ctl.menuPressed) {
 			Ray ray = new Ray(rayPos, rayDir);
 			RaycastHit hit;
 			if (GetComponent<Collider>().Raycast(ray, out hit, Mathf.Infinity)) {

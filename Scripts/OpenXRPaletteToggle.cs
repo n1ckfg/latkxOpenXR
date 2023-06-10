@@ -15,7 +15,7 @@ public class OpenXRPaletteToggle : MonoBehaviour {
 	// color
 	public GameObject colorModeObj;
 
-	private bool fixLaserRot = false;
+	//private bool fixLaserRot = false;
 
 	void Awake() {
 		colorModeObj.SetActive(false);
