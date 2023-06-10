@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class VivePaletteToggle : MonoBehaviour {
+public class OpenXRPaletteToggle : MonoBehaviour {
 
-	public SteamVR_NewController steamCtl;
+	public OpenXR_NewController ctl;
 	public GameObject laser;
 
 	public enum CtlModeL { JET, COLOR };
@@ -26,9 +26,9 @@ public class VivePaletteToggle : MonoBehaviour {
 	}
 
 	void Update() {
-		if (steamCtl.menuDown) {
+		if (ctl.menuDown) {
 			switchCtlMode(CtlModeL.COLOR);
-		} else if (steamCtl.menuUp) {
+		} else if (ctl.menuUp) {
 			switchCtlMode(CtlModeL.JET);
 		}
 	}

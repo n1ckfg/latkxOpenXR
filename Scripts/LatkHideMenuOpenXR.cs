@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LatkHideMenuVive : MonoBehaviour {
+public class LatkHideMenuOpenXR : MonoBehaviour {
 
-	public SteamVR_NewController[] steamCtl;
+	public OpenXR_NewController[] steamCtl;
 	public Renderer[] ren;
 
 	private bool firstRun = true;

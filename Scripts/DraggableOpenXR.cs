@@ -3,9 +3,9 @@
 
 using UnityEngine;
 
-public class DraggableVive : MonoBehaviour {
+public class DraggableOpenXR : MonoBehaviour {
 
-	public SteamVR_NewController steamCtl;
+	public OpenXR_NewController steamCtl;
 	public Transform minBound;
 	public bool fixX = false;
 	public bool fixY = false;

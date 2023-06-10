@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LatkInputVive : MonoBehaviour {
+public class LatkInputOpenXR : MonoBehaviour {
 
-	public SteamVR_NewController steamControllerMain;
-	public SteamVR_NewController steamControllerAlt;
+	public OpenXR_NewController ctlMain;
+	public OpenXR_NewController ctlAlt;
 	public LightningArtist latk;
     public Renderer collisionGuideRen;
 
@@ -17,30 +17,30 @@ public class LatkInputVive : MonoBehaviour {
 
     void Update() {
         // draw
-        if ((steamControllerMain.triggerPressed && !steamControllerMain.menuPressed)) {// || Input.GetKeyDown(KeyCode.Space)) {
+        if ((ctlMain.triggerPressed && !ctlMain.menuPressed)) {// || Input.GetKeyDown(KeyCode.Space)) {
             latk.clicked = true;
         } else {
             latk.clicked = false;
         }
 
-        if (steamControllerMain.triggerPressed && steamControllerMain.menuPressed) {
+        if (ctlMain.triggerPressed && ctlMain.menuPressed) {
             latk.inputErase();
-        } else if (!steamControllerMain.triggerPressed && steamControllerMain.menuPressed) {
+        } else if (!ctlMain.triggerPressed && ctlMain.menuPressed) {
             latk.inputPush();
             latk.inputColorPick();
         }
 
         // new frame
-        if (steamControllerAlt.triggerDown && steamControllerMain.menuPressed) {
+        if (ctlAlt.triggerDown && ctlMain.menuPressed) {
             latk.inputNewFrameAndCopy();
             Debug.Log("Ctl: New Frame Copy");
-        } else if (steamControllerAlt.triggerDown && !steamControllerMain.menuPressed) {
+        } else if (ctlAlt.triggerDown && !ctlMain.menuPressed) {
             latk.inputNewFrame();
             Debug.Log("Ctl: New Frame");
         }
 
         // show / hide all frames
-        if ((!steamControllerMain.menuPressed && steamControllerAlt.menuDown)) {
+        if ((!ctlMain.menuPressed && ctlAlt.menuDown)) {
             latk.showOnionSkin = !latk.showOnionSkin;
             if (latk.showOnionSkin) {
                 latk.inputShowFrames();
@@ -51,59 +51,59 @@ public class LatkInputVive : MonoBehaviour {
 
         // ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-        if (steamControllerMain.menuPressed && steamControllerAlt.menuDown) {
+        if (ctlMain.menuPressed && ctlAlt.menuDown) {
             latk.inputDeleteFrame();
         }
 
         // *** write ***
-        if (steamControllerMain.padDirDown && steamControllerAlt.padDirDown) {
-            if ((steamControllerMain.padDown && steamControllerAlt.padPressed) || (steamControllerMain.padPressed && steamControllerAlt.padDown)) {
+        if (ctlMain.padDirDown && ctlAlt.padDirDown) {
+            if ((ctlMain.padDown && ctlAlt.padPressed) || (ctlMain.padPressed && ctlAlt.padDown)) {
                 if (!latk.isWritingFile) latk.armWriteFile = true;
             }
         }
 
         // dir pad main
-        if (steamControllerMain.padDown) {
-            if (steamControllerMain.padDirCenter) {
+        if (ctlMain.padDown) {
+            if (ctlMain.padDirCenter) {
                 if (latk.brushMode == LightningArtist.BrushMode.ADD) {
                     latk.brushMode = LightningArtist.BrushMode.SURFACE;
                 } else {
                     latk.brushMode = LightningArtist.BrushMode.ADD;
                 }
-            } else if (steamControllerMain.padDirUp) {
+            } else if (ctlMain.padDirUp) {
                 StartCoroutine(delayedUseCollisions());
             }
         }
 
-        if (steamControllerMain.padPressed) {
-            if (steamControllerMain.padDirLeft) {
+        if (ctlMain.padPressed) {
+            if (ctlMain.padDirLeft) {
                 latk.brushSizeInc();
-            } else if (steamControllerMain.padDirRight) {
+            } else if (ctlMain.padDirRight) {
                 latk.brushSizeDec();
             }
         }
 
         // dir pad alt
-        if (steamControllerAlt.padDown) {
-            if (steamControllerMain.menuPressed) {
-                if (steamControllerAlt.padDirCenter) {
+        if (ctlAlt.padDown) {
+            if (ctlMain.menuPressed) {
+                if (ctlAlt.padDirCenter) {
                     // TODO capture
-                } else if (steamControllerAlt.padDirUp) {
+                } else if (ctlAlt.padDirUp) {
                     latk.inputNewLayer();
-                } else  if (steamControllerAlt.padDirLeft) {
+                } else  if (ctlAlt.padDirLeft) {
                     latk.inputNextLayer();
-                } else if (steamControllerAlt.padDirRight) {
+                } else if (ctlAlt.padDirRight) {
                     latk.inputPreviousLayer();
                 }
             } else {
-                if (steamControllerAlt.padDirCenter) {
+                if (ctlAlt.padDirCenter) {
                     latk.inputPlay();
-                } else if (steamControllerAlt.padDirUp) {
+                } else if (ctlAlt.padDirUp) {
                     latk.inputFirstFrame();
-                } else if (steamControllerAlt.padDirRight) {
+                } else if (ctlAlt.padDirRight) {
                     latk.inputFrameBack();
                     StartCoroutine(repeatFrameBack());
-                } else if (steamControllerAlt.padDirLeft) {
+                } else if (ctlAlt.padDirLeft) {
                     latk.inputFrameForward();
                     StartCoroutine(repeatFrameForward());
                 }
@@ -113,7 +113,7 @@ public class LatkInputVive : MonoBehaviour {
 
     IEnumerator repeatFrameForward() {
         yield return new WaitForSeconds(repeatDelay);
-        while (steamControllerAlt.padPressed && steamControllerAlt.padDirLeft) {
+        while (ctlAlt.padPressed && ctlAlt.padDirLeft) {
             latk.inputFrameForward();
             yield return new WaitForSeconds(latk.frameInterval);
         }
@@ -121,7 +121,7 @@ public class LatkInputVive : MonoBehaviour {
 
     IEnumerator repeatFrameBack() {
         yield return new WaitForSeconds(repeatDelay);
-        while (steamControllerAlt.padPressed && steamControllerAlt.padDirRight) {
+        while (ctlAlt.padPressed && ctlAlt.padDirRight) {
             latk.inputFrameBack();
             yield return new WaitForSeconds(latk.frameInterval);
         }
@@ -129,7 +129,7 @@ public class LatkInputVive : MonoBehaviour {
 
     IEnumerator delayedUseCollisions() {
         yield return new WaitForSeconds(collisionDelay);
-        if (steamControllerMain.padDirUp) {
+        if (ctlMain.padDirUp) {
             latk.useCollisions = !latk.useCollisions;
             if (collisionGuideRen != null) collisionGuideRen.enabled = latk.useCollisions;
         }
