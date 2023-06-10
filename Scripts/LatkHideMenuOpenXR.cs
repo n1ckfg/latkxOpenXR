@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LatkHideMenuOpenXR : MonoBehaviour {
 
-	public OpenXR_NewController[] steamCtl;
+	public OpenXR_NewController[] ctl;
 	public Renderer[] ren;
 
 	private bool firstRun = true;
@@ -16,8 +16,8 @@ public class LatkHideMenuOpenXR : MonoBehaviour {
 
 	void Update () {
 		if (firstRun) {
-			for (int i = 0; i < steamCtl.Length; i++) {
-				if (Input.GetMouseButtonDown(0) || Input.anyKeyDown || steamCtl[i].triggerDown || steamCtl[i].menuDown || steamCtl[i].gripDown || steamCtl[i].padDown) {
+			for (int i = 0; i < ctl.Length; i++) {
+				if (Input.GetMouseButtonDown(0) || Input.anyKeyDown || ctl[i].triggerDown || ctl[i].menuDown || ctl[i].gripDown || ctl[i].padDown) {
 					showHide(false);
 					firstRun = false;
 				}
