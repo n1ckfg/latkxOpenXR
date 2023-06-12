@@ -25,6 +25,7 @@ public class OpenXR_NewController : MonoBehaviour {
     public bool padDirCenter = false;
 
     public Vector2 touchpad = new Vector2(0f, 0f);
+    public float triggerThreshold = 0.33f;
 
     [HideInInspector] public Vector3 startPos = Vector3.zero;
     [HideInInspector] public Vector3 endPos = Vector3.zero;
@@ -45,7 +46,7 @@ public class OpenXR_NewController : MonoBehaviour {
 
         // https://docs.unity3d.com/ScriptReference/XR.CommonUsages.html
         if (controller.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool input_triggerPressed)) {
-            if (input_triggerPressed && !triggerPressed) {
+            if ((triggerVal > triggerThreshold || input_triggerPressed) && !triggerPressed) {
                 triggerPressed = true;
                 triggerDown = true;
                 startPos = transform.position;
