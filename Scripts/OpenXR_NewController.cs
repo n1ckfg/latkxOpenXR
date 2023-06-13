@@ -25,7 +25,6 @@ public class OpenXR_NewController : MonoBehaviour {
     public bool padDirCenter = false;
 
     public Vector2 touchpad = new Vector2(0f, 0f);
-    public float triggerThreshold = 0.33f;
 
     [HideInInspector] public Vector3 startPos = Vector3.zero;
     [HideInInspector] public Vector3 endPos = Vector3.zero;
@@ -34,6 +33,7 @@ public class OpenXR_NewController : MonoBehaviour {
     private XRController controller;
 
     private float touchPadLimit = 0.6f; // 0.7f;
+    private float triggerThreshold = 0.3f;
 
     private void Awake() {
         controller = GetComponent<XRController>();
@@ -45,17 +45,18 @@ public class OpenXR_NewController : MonoBehaviour {
         checkPadDir();
 
         // https://docs.unity3d.com/ScriptReference/XR.CommonUsages.html
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool input_triggerPressed)) {
-            if ((triggerVal > triggerThreshold || input_triggerPressed) && !triggerPressed) {
-                triggerPressed = true;
-                triggerDown = true;
-                startPos = transform.position;
-            } else if (!input_triggerPressed && triggerPressed) {
-                triggerPressed = false;
-                triggerUp = true;
-                endPos = transform.position;
-            }
+        //if (controller.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool input_triggerPressed)) {
+        bool input_triggerPressed = triggerVal > triggerThreshold;
+        if (input_triggerPressed && !triggerPressed) {
+            triggerPressed = true;
+            triggerDown = true;
+            startPos = transform.position;
+        } else if (!input_triggerPressed && triggerPressed) {
+            triggerPressed = false;
+            triggerUp = true;
+            endPos = transform.position;
         }
+        //}
 
         if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool input_padPressed)) {
             if (input_padPressed & !padPressed) {
