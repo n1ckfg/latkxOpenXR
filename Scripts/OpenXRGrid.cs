@@ -25,8 +25,8 @@ public class OpenXRGrid : MonoBehaviour {
     private Quaternion origRot;
     private Vector2 lastCursor = Vector2.zero;
     private float lastCursorDist = 0f;
-    private float sensitivityX = 2f;
-    private float sensitivityY = 2f;
+    //private float sensitivityX = 2f;
+    //private float sensitivityY = 2f;
     private bool blockRetrigger = false;
     private float retriggerTimeout = 5f;
     private float timeoutCounter = 0f;
@@ -37,11 +37,11 @@ public class OpenXRGrid : MonoBehaviour {
         if (!latk.useCollisions) grid.enabled = false;
 
         // for some reason sensitivity is greater in build than in editor
-#if !UNITY_EDITOR
-		float sensReduce = 8f;
-		sensitivityX /= sensReduce;
-		sensitivityY /= sensReduce;
-#endif
+//#if !UNITY_EDITOR
+		//float sensReduce = 8f;
+		//sensitivityX /= sensReduce;
+		//sensitivityY /= sensReduce;
+//#endif
     }
 
     private void Start() {

@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(XRController))]
 public class OpenXR_NewController : MonoBehaviour {
 
+    public OpenXR_TargetDevice targetDevice;
+
     public bool triggerPressed = false;
     public bool padPressed = false;
     public bool gripped = false;
@@ -78,14 +80,29 @@ public class OpenXR_NewController : MonoBehaviour {
             }
         }
 
-        if (controller.inputDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool input_menuPressed)) {
-            if (input_menuPressed & !menuPressed) {
-                menuPressed = true;
-                menuDown = true;
-            } else if (!input_menuPressed && menuPressed) {
-                menuPressed = false;
-                menuUp = true;
-            }
+        switch (targetDevice.whichDevice) {
+            case OpenXR_TargetDevice.WhichDevice.OCULUS:
+                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool input_primaryPressed)) {
+                    if (input_primaryPressed & !menuPressed) {
+                        menuPressed = true;
+                        menuDown = true;
+                    } else if (!input_primaryPressed && menuPressed) {
+                        menuPressed = false;
+                        menuUp = true;
+                    }
+                }
+                break;
+            default:
+                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool input_menuPressed)) {
+                    if (input_menuPressed & !menuPressed) {
+                        menuPressed = true;
+                        menuDown = true;
+                    } else if (!input_menuPressed && menuPressed) {
+                        menuPressed = false;
+                        menuUp = true;
+                    }
+                }
+                break;
         }
     }
 
