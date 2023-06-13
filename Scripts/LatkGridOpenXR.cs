@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 //using PressureLib;
 
-public class OpenXRGrid : MonoBehaviour {
+public class LatkGridOpenXR : MonoBehaviour {
 
     public LightningArtist latk;
     public Transform mainCtl;

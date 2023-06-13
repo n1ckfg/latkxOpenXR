@@ -3,9 +3,10 @@
 
 using UnityEngine;
 
-public class DraggableOpenXR : MonoBehaviour {
+public class OpenXR_Draggable : MonoBehaviour {
 
 	public OpenXR_NewController ctl;
+    public Transform rayTransform;
 	public Transform minBound;
 	public bool fixX = false;
 	public bool fixY = false;
@@ -15,8 +16,8 @@ public class DraggableOpenXR : MonoBehaviour {
 	bool dragging;
 
 	void FixedUpdate() {
-		Vector3 rayPos = ctl.transform.position;
-		Vector3 rayDir = ctl.transform.forward;
+		Vector3 rayPos = rayTransform.position;
+		Vector3 rayDir = rayTransform.forward;
 
 		if (ctl.menuPressed) {
 			dragging = false;
