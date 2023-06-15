@@ -6,6 +6,7 @@ public class OpenXR_TargetDevice : MonoBehaviour {
 
     public enum WhichDevice { VIVE, OCULUS };
     public WhichDevice whichDevice = WhichDevice.VIVE;
+    public bool rotationCorrection = true;
     public Transform R_controller_root;
     public Transform L_controller_root;
 
@@ -15,12 +16,16 @@ public class OpenXR_TargetDevice : MonoBehaviour {
     private void Start() {
         switch (whichDevice) {
             case WhichDevice.VIVE:
-                R_controller_root.Rotate(viveRotOffset);
-                L_controller_root.Rotate(viveRotOffset);
+                if (rotationCorrection) {
+                    R_controller_root.Rotate(viveRotOffset);
+                    L_controller_root.Rotate(viveRotOffset);
+                }
                 break;
             case WhichDevice.OCULUS:
-                R_controller_root.Rotate(oculusRotOffset);
-                L_controller_root.Rotate(oculusRotOffset);
+                if (rotationCorrection) {
+                    R_controller_root.Rotate(oculusRotOffset);
+                    L_controller_root.Rotate(oculusRotOffset);
+                }
                 break;
         }
     }
