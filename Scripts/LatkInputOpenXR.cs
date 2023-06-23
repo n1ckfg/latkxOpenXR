@@ -7,6 +7,7 @@ public class LatkInputOpenXR : MonoBehaviour {
 	public OpenXR_NewController ctlAlt;
 	public LightningArtist latk;
     public Renderer collisionGuideRen;
+    public Inference_informative onnx;
 
     private float collisionDelay = 0.2f;
     private float repeatDelay = 0.5f;
@@ -50,6 +51,10 @@ public class LatkInputOpenXR : MonoBehaviour {
         }
 
         // ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+        if (onnx != null && (Input.GetKeyUp(KeyCode.X) || (ctlMain.menu2Pressed && ctlAlt.menu2Pressed))) {
+            onnx.DoInference();
+        }
 
         if (ctlMain.menuPressed && ctlAlt.menuDown) {
             latk.inputDeleteFrame();

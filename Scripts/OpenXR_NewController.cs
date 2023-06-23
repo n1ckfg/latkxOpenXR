@@ -65,7 +65,7 @@ public class OpenXR_NewController : MonoBehaviour {
 
                 break;
 
-            case OpenXR_TargetDevice.WhichDevice.OCULUS:
+            case OpenXR_TargetDevice.WhichDevice.QUEST:
                 if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool input_primaryPressed)) {
                     if (input_primaryPressed & !menuPressed) {
                         menuPressed = true;
@@ -177,7 +177,7 @@ public class OpenXR_NewController : MonoBehaviour {
         // Note: Vive counts off-center dpad movement as a press, Oculus does not.
         /*
         switch (targetDevice.whichDevice) {
-            case OpenXR_TargetDevice.WhichDevice.OCULUS:
+            case OpenXR_TargetDevice.WhichDevice.QUEST:
                 if (!padDirCenter & !padPressed) {
                     padPressed = true;
                     padDown = true;
@@ -190,7 +190,7 @@ public class OpenXR_NewController : MonoBehaviour {
         */
     }
 
-        public void vibrateController(float val) {
+    public void vibrateController(float val) {
         int ms = (int)val * 1000;
         //device.TriggerHapticPulse((ushort)ms, Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad);
     }

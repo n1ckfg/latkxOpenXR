@@ -8,7 +8,7 @@ public class OpenXR_PassthroughManager : MonoBehaviour {
 
     private void Start() {
         switch (targetDevice.whichDevice) {
-            case OpenXR_TargetDevice.WhichDevice.OCULUS:
+            case OpenXR_TargetDevice.WhichDevice.QUEST:
                 //var passthrough = gameObject.AddComponent<OVRPassthroughLayer>();
                 //passthrough.overlayType = OVROverlay.OverlayType.Underlay;
 
