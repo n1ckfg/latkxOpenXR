@@ -52,7 +52,7 @@ public class LatkInputOpenXR : MonoBehaviour {
 
         // ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-        if (onnx != null && (Input.GetKeyUp(KeyCode.X) || (ctlMain.menu2Pressed && ctlAlt.menu2Pressed))) {
+        if (onnx != null && (ctlMain.menu2Pressed && ctlAlt.menu2Pressed)) {
             onnx.DoInference();
         }
 
