@@ -7,6 +7,7 @@ public class LatkInputOpenXR : MonoBehaviour {
 	public OpenXR_NewController ctlAlt;
 	public LightningArtist latk;
     public Renderer collisionGuideRen;
+    public Collider collisionGuideCol;
     public Inference_informative onnx;
 
     private float collisionDelay = 0.2f;
@@ -137,6 +138,7 @@ public class LatkInputOpenXR : MonoBehaviour {
         if (ctlMain.padDirUp) {
             latk.useCollisions = !latk.useCollisions;
             if (collisionGuideRen != null) collisionGuideRen.enabled = latk.useCollisions;
+            if (collisionGuideCol != null) collisionGuideCol.enabled = latk.useCollisions;
         }
     }
 
