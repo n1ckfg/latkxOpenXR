@@ -20,7 +20,7 @@ public class OpenXR_PassthroughManager : MonoBehaviour {
                 // framebuffer contains semi-transparent pixels even without Selective Passthrough, as those will have
                 // premultiplied colors.
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_ANDROID
-                OVRManager.eyeFovPremultipliedAlphaModeEnabled = false;
+                //OVRManager.eyeFovPremultipliedAlphaModeEnabled = false;
 #endif
                 break;
         }
