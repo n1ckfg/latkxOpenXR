@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OpenXR_TargetDevice : MonoBehaviour {
 
-    public enum WhichDevice { VIVE, QUEST };
+    public enum WhichDevice { VIVE, QUEST, VIVEXR };
     public WhichDevice whichDevice = WhichDevice.VIVE;
     public bool rotationCorrection = true;
     public Transform R_controller_root;
@@ -15,7 +15,7 @@ public class OpenXR_TargetDevice : MonoBehaviour {
 
     private void Start() {
         switch (whichDevice) {
-            case WhichDevice.VIVE:
+            case WhichDevice.VIVEXR:
                 if (rotationCorrection) {
                     R_controller_root.Rotate(viveRotOffset);
                     L_controller_root.Rotate(viveRotOffset);
@@ -25,6 +25,12 @@ public class OpenXR_TargetDevice : MonoBehaviour {
                 if (rotationCorrection) {
                     R_controller_root.Rotate(oculusRotOffset);
                     L_controller_root.Rotate(oculusRotOffset);
+                }
+                break;
+            default: // VIVE
+                if (rotationCorrection) {
+                    R_controller_root.Rotate(viveRotOffset);
+                    L_controller_root.Rotate(viveRotOffset);
                 }
                 break;
         }

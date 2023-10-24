@@ -52,7 +52,53 @@ public class OpenXR_NewController : MonoBehaviour {
         checkPadDir();
         
         switch (targetDevice.whichDevice) {
-            case OpenXR_TargetDevice.WhichDevice.VIVE:
+            case OpenXR_TargetDevice.WhichDevice.QUEST:
+                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool input_primaryPressed_Q)) {
+                    if (input_primaryPressed_Q & !menuPressed) {
+                        menuPressed = true;
+                        menuDown = true;
+                    } else if (!input_primaryPressed_Q && menuPressed) {
+                        menuPressed = false;
+                        menuUp = true;
+                    }
+                }
+
+                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool input_secondaryPressed_Q)) {
+                    if (input_secondaryPressed_Q & !menu2Pressed) {
+                        menu2Pressed = true;
+                        menu2Down = true;
+                    } else if (!input_secondaryPressed_Q && menu2Pressed) {
+                        menu2Pressed = false;
+                        menu2Up = true;
+                    }
+                }
+
+                break;
+
+            case OpenXR_TargetDevice.WhichDevice.VIVEXR:
+                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool input_primaryPressed_VX)) {
+                    if (input_primaryPressed_VX & !menuPressed) {
+                        menuPressed = true;
+                        menuDown = true;
+                    } else if (!input_primaryPressed_VX && menuPressed) {
+                        menuPressed = false;
+                        menuUp = true;
+                    }
+                }
+
+                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool input_secondaryPressed_VX)) {
+                    if (input_secondaryPressed_VX & !menu2Pressed) {
+                        menu2Pressed = true;
+                        menu2Down = true;
+                    } else if (!input_secondaryPressed_VX && menu2Pressed) {
+                        menu2Pressed = false;
+                        menu2Up = true;
+                    }
+                }
+
+                break;
+
+            default: // VIVE
                 if (controller.inputDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool input_menuPressed)) {
                     if (input_menuPressed & !menuPressed) {
                         menuPressed = true;
@@ -60,29 +106,6 @@ public class OpenXR_NewController : MonoBehaviour {
                     } else if (!input_menuPressed && menuPressed) {
                         menuPressed = false;
                         menuUp = true;
-                    }
-                }
-
-                break;
-
-            case OpenXR_TargetDevice.WhichDevice.QUEST:
-                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool input_primaryPressed)) {
-                    if (input_primaryPressed & !menuPressed) {
-                        menuPressed = true;
-                        menuDown = true;
-                    } else if (!input_primaryPressed && menuPressed) {
-                        menuPressed = false;
-                        menuUp = true;
-                    }
-                }
-
-                if (controller.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool input_secondaryPressed)) {
-                    if (input_secondaryPressed & !menu2Pressed) {
-                        menu2Pressed = true;
-                        menu2Down = true;
-                    } else if (!input_secondaryPressed && menu2Pressed) {
-                        menu2Pressed = false;
-                        menu2Up = true;
                     }
                 }
 
