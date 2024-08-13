@@ -8,7 +8,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class OpenXR_NewController : MonoBehaviour {
 
     public OpenXR_TargetDevice targetDevice;
-
+    public bool useTouchXPressure = false;
+    
+    [Header("Controller States")]
     public bool triggerPressed = false;
     public bool padPressed = false;
     public bool gripped = false;
@@ -114,7 +116,7 @@ public class OpenXR_NewController : MonoBehaviour {
 
         // Note: Vive has built-in trigger threshold, Oculus does not.
         //if (controller.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool input_triggerPressed)) {
-        bool input_triggerPressedByVal = triggerVal > triggerThreshold;
+        bool input_triggerPressedByVal = triggerVal > triggerThreshold || (useTouchXPressure && touchpad.x > 0f);
         if (input_triggerPressedByVal && !triggerPressed) {
             triggerPressed = true;
             triggerDown = true;
